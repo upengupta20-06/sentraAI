@@ -64,15 +64,7 @@ const ComplaintSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  },
-
-  updatedAt: Date
-});
-
-//  Auto-update timestamp
-ComplaintSchema.pre("save", function (next) {
-  this.updatedAt = new Date();
-  next();
-});
+  }
+}, { timestamps: true });
 
 module.exports = mongoose.model("Complaint", ComplaintSchema);

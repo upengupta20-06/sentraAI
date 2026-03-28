@@ -20,6 +20,7 @@ const {
 exports.createComplaint = async (req, res) => {
   try {
     const { text } = req.body;
+    console.log("📥 New complaint request received:", text);
 
     if (!text) {
       return res.status(400).json({ error: "Complaint text is required" });

@@ -1,15 +1,11 @@
-const { pipeline } = require("@xenova/transformers");
-
-let sentimentPipeline;
-
-(async () => {
-  sentimentPipeline = await pipeline(
-    "sentiment-analysis",
-    "Xenova/distilbert-base-uncased-finetuned-sst-2-english"
-  );
-})();
-
+// sentiment.js - Fallback
 exports.analyzeSentiment = async (text) => {
-  const result = await sentimentPipeline(text);
-  return result[0].label;
+  const lower = text.toLowerCase();
+  if (lower.includes("bad") || lower.includes("worst") || lower.includes("broken") || lower.includes("hate")) {
+    return "NEGATIVE";
+  }
+  if (lower.includes("good") || lower.includes("great") || lower.includes("excellent") || lower.includes("love")) {
+    return "POSITIVE";
+  }
+  return "NEUTRAL";
 };
