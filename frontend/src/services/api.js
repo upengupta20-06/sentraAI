@@ -6,3 +6,4 @@ const API = axios.create({
 
 export const sendComplaint = (text) => API.post("/complaints", { text });
 export const getComplaints = () => API.get("/complaints");
+export const updateComplaintStatus = (id, status) => API.put(`/${id}`, { status });

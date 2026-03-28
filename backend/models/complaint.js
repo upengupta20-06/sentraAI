@@ -9,8 +9,21 @@ const ComplaintSchema = new mongoose.Schema({
   },
 
   
+  // AI deep analysis
   sentiment: String,
   category: String,
+  product: String,
+  severity: {
+    type: String,
+    enum: ["Low", "Medium", "High", "Critical"],
+    default: "Medium"
+  },
+  rootCause: String,
+  regulatoryFlag: {
+    type: Boolean,
+    default: false
+  },
+  nextBestAction: String,
 
   //  Duplicate / similar complaints
   similar: [
@@ -26,7 +39,7 @@ const ComplaintSchema = new mongoose.Schema({
   //  Status tracking
   status: {
     type: String,
-    enum: ["Open", "In Progress", "Resolved"],
+    enum: ["Open", "In Progress", "Resolved", "Escalated", "Regulatory Review"],
     default: "Open"
   },
 
@@ -50,7 +63,7 @@ const ComplaintSchema = new mongoose.Schema({
       message: String,
       sender: {
         type: String,
-        enum: ["User", "Agent", "System"],
+        enum: ["User", "Agent", "System", "Legal"],
         default: "User"
       },
       timestamp: {
@@ -59,6 +72,7 @@ const ComplaintSchema = new mongoose.Schema({
       }
     }
   ],
+
 
   //  timestamps
   createdAt: {
